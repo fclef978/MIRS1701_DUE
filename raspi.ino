@@ -25,8 +25,12 @@ int raspiGetValue(int addr) {
   return values[addr];
 }
 
-void raspiResetRunMode() {
-  values[0] = 0;
+bool raspiIsNew() {
+  if (values[100] == 0) {
+    return false;
+  }
+  values[100] = 0;
+  return true;
 }
 
 bool raspiReceive() {
@@ -45,7 +49,7 @@ bool raspiReceive() {
 }
 
 int raspiSortCommand(String cmd) {
-  if (cmd.length() > 2) {
+  if (cmd.length() != 2) {
     return -1;
   }
   int result = 0;
@@ -55,6 +59,21 @@ int raspiSortCommand(String cmd) {
       switch (backward) {
         case 'M':
           result = 0;
+          break;
+        case 'S':
+          result = 1;
+          break;
+        case 'D':
+          result = 2;
+          break;
+        default:
+          result = -1;
+      }
+      break;
+    case 'C':
+      switch (backward) {
+        case 'N':
+          result = 100;
           break;
         default:
           result = -1;

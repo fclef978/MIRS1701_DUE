@@ -13,11 +13,11 @@ QList<String> qStrB;
 void loop() {
   // put your main code here, to run repeatedly:
   slave();
-  delay(500);
+  delay(2000);
 }
 
 void loopCommunication() {
   raspiReceive();
-  delay(1);
+  delay(1000);
 }
 
