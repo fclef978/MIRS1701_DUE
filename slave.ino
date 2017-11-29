@@ -1,24 +1,23 @@
 void slave() {
-  SerialUSB.println("MainTask");
   if (raspiGetValue(0) == 0) {
     return;
   }
-  if (raspiIsNew()) {
+  if (raspiIsUpdated()) {
     switch (raspiGetValue(0)) {
       case 0:
         break;
       case 1:
-        SerialUSB.println("Stop");
+        runCtrlSet(STP, 0, 0);
         break;
       case 2:
-        SerialUSB.print("Straight ");
-        SerialUSB.print(raspiGetValue(1));
-        SerialUSB.print(",");
-        SerialUSB.println(raspiGetValue(2));
+        runCtrlSet(STR, raspiGetValue(1), raspiGetValue(2));
+        SerialUSB.println("STR");
         break;
       default:
         break;
     }
   }
+  runCtrlExecute();
+  velCtrlExecute();
 }
 

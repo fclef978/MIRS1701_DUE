@@ -25,7 +25,7 @@ int raspiGetValue(int addr) {
   return values[addr];
 }
 
-bool raspiIsNew() {
+bool raspiIsUpdated() {
   if (values[100] == 0) {
     return false;
   }
@@ -72,7 +72,7 @@ int raspiSortCommand(String cmd) {
       break;
     case 'C':
       switch (backward) {
-        case 'N':
+        case 'U':
           result = 100;
           break;
         default:
@@ -81,6 +81,17 @@ int raspiSortCommand(String cmd) {
       break;
     default:
       result = -1;
+    case 'V':
+      switch (backward) {
+        case 'L':
+          result = 3;
+          break;
+        case 'R':
+          result = 4;
+          break;
+        default:
+          result = -1;
+      }
   }
   return result;
 }

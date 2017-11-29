@@ -1,23 +1,25 @@
 #include <Scheduler.h>
-#include "QList.h"
+#include "define.h"
+// RasPi:Ready;RM:2;RS:50;RD:100;CU:1;
 
 void setup() {
   // put your setup code here, to run once:
   raspiOpen();
+  ioOpen();
+  encoderOpen();
+  motorOpen();
+  queOpen();
   Scheduler.startLoop(loopCommunication);
 }
-
-QList<String> qStrA;
-QList<String> qStrB;
 
 void loop() {
   // put your main code here, to run repeatedly:
   slave();
-  delay(2000);
+  delay(T_CTRL);
 }
 
 void loopCommunication() {
   raspiReceive();
-  delay(1000);
+  delay(1);
 }
 
