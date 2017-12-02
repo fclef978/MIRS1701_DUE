@@ -25,6 +25,14 @@ int raspiGetValue(int addr) {
   return values[addr];
 }
 
+void raspiSend(String cmd, String val) {
+  raspiWrite(cmd + ":" + val + ";");
+}
+
+void raspiWrite(String data) {
+  SerialUSB.print(data);
+}
+
 bool raspiIsUpdated() {
   if (values[100] == 0) {
     return false;
@@ -55,24 +63,30 @@ int raspiSortCommand(String cmd) {
   int result = 0;
   char forward = cmd[0], backward = cmd[1];
   switch (forward) {
-    case 'R':
+    case 'R': // run
       switch (backward) {
-        case 'M':
+        case 'M': // mode
           result = 0;
           break;
-        case 'S':
+        case 'S': // speed
           result = 1;
           break;
-        case 'D':
+        case 'D': // distance
           result = 2;
+          break;
+        case 'O': // omega
+          result = 3;
+          break;
+        case 'A': // angle
+          result = 4;
           break;
         default:
           result = -1;
       }
       break;
-    case 'C':
+    case 'C': // command
       switch (backward) {
-        case 'U':
+        case 'U': // update
           result = 100;
           break;
         default:
@@ -81,7 +95,7 @@ int raspiSortCommand(String cmd) {
       break;
     default:
       result = -1;
-    case 'V':
+    case 'V': // velocity
       switch (backward) {
         case 'L':
           result = 3;
