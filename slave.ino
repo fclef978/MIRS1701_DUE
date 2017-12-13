@@ -11,11 +11,9 @@ void slave() {
         break;
       case 2:
         runCtrlSet(STR, raspiGetValue(1), raspiGetValue(2));
-        SerialUSB.println("STR");
         break;
       case 3:
         runCtrlSet(ROT, raspiGetValue(3), raspiGetValue(4));
-        SerialUSB.println("STR");
         break;
       case 100:
         softwareReset();

@@ -23,10 +23,10 @@ void loop() {
 
 void loopCommunication() {
   while (raspiReceive()) {}
-  raspiSend("battA", String(num++));
-  raspiSend("battB", String(num++));
-  raspiSend("jsX", String(num++));
-  raspiSend("jsY", String(num++));
-  delay(1);
+  raspiSend("battA", String(0));
+  raspiSend("battB", String(0));
+  raspiSend("jsX", String(0));
+  raspiSend("jsY", String(0));
+  delay(10);
 }
 
