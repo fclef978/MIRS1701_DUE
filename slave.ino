@@ -15,6 +15,11 @@ void slave() {
       case 3:
         runCtrlSet(ROT, raspiGetValue(3), raspiGetValue(4));
         break;
+      case 4:
+        runCtrlSet(VEL, 0, 0);
+        velCtrlSet(raspiGetValue(5), raspiGetValue(6));
+        SerialUSB.println(raspiGetValue(5) + raspiGetValue(6));
+        break;
       case 100:
         softwareReset();
         break;

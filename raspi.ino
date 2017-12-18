@@ -98,10 +98,10 @@ int raspiSortCommand(String cmd) {
     case 'V': // velocity
       switch (backward) {
         case 'L':
-          result = 3;
+          result = 5;
           break;
         case 'R':
-          result = 4;
+          result = 6;
           break;
         default:
           result = -1;
