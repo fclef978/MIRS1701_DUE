@@ -7,16 +7,24 @@ typedef enum {
 } run_state_t;
 
 /* ピン配置 */
-#define PIN_ENC_A_L  2
-#define PIN_ENC_B_L  4
-#define PIN_ENC_A_R  3
-#define PIN_ENC_B_R  7
-#define PIN_DIR_R    8
-#define PIN_PWM_R    9
-#define PIN_DIR_L   12
-#define PIN_PWM_L   11
-#define PIN_SW      10
-#define PIN_BATT    19
+#define PIN_CTRL_A  0
+#define PIN_CTRL_B  1
+#define PIN_PIC     2
+#define PIN_BTSW_A  3
+#define PIN_BTSW_B  4
+#define PIN_ENC_B_L 5
+#define PIN_ENC_A_L 6
+#define PIN_ENC_B_R 7
+#define PIN_ENC_A_R 8
+#define PIN_PWM_L   9
+#define PIN_DIR_L   10
+#define PIN_PWM_R   11
+#define PIN_DIR_R   12
+#define PIN_BTV_A   A0
+#define PIN_BTV_B   A1
+#define PIN_JS_X    A3
+#define PIN_JS_Y    A4
+#define PIN_SLVR    A5
 
 /* パラメータ */
 // 動作周期 [ms]
