@@ -8,5 +8,13 @@ void commSend() {
   raspiSend("mode", String(rs));
   raspiSend("speed", String(speed));
   raspiSend("distance", String(distance));
+  raspiSend("jsX", String(ioGetJs('x')));
+  raspiSend("jsY", String(ioGetJs('y')));
+  raspiSend("btA", String(ioGetBatt('a')));
+  raspiSend("btB", String(ioGetBatt('b')));
+  raspiSend("slvr", String(ioGetVR()));
+  raspiSend("ctrlA", String(ioGetCtrlBtn('a')));
+  raspiSend("ctrlB", String(ioGetCtrlBtn('b')));
+  raspiSend("cap", String(ioGetCap()));
 }
 

@@ -1,6 +1,6 @@
 #include <Scheduler.h>
 #include "define.h"
-// RasPi:Ready;RM:2;RS:50;RD:100;CU:1;
+// CRM:2;RS:50;RD:100;CU:1;
 // RasPi:Ready;RM:4;VL:60;VR:20;CU:1;
 
 void setup() {
@@ -24,6 +24,6 @@ void loop() {
 void loopCommunication() {
   while (raspiReceive());
   commSend();
-  delay(10);
+  delay(1000);
 }
 

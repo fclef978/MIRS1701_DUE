@@ -11,8 +11,8 @@ void encoderOpen() {
   digitalWrite(PIN_ENC_B_L, HIGH);
   digitalWrite(PIN_ENC_A_R, HIGH);
   digitalWrite(PIN_ENC_B_R, HIGH);
-  attachInterrupt(2, encChangeLeft, CHANGE);
-  attachInterrupt(3, encChangeRight, CHANGE);
+  attachInterrupt(PIN_ENC_A_L, encChangeLeft, CHANGE);
+  attachInterrupt(PIN_ENC_A_R, encChangeRight, CHANGE);
 }
 
 void encoderGet(long *cnt_l, long *cnt_r) {
