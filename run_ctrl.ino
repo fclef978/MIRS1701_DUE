@@ -82,8 +82,8 @@ void runCtrlExecute() {
       }
 
       break;
-      
       case VEL:
+        velCtrlSet(speed_ref, dist_ref);
         break;
   }
 }

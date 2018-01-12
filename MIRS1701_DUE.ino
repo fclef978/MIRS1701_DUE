@@ -24,6 +24,6 @@ void loop() {
 void loopCommunication() {
   while (raspiReceive());
   commSend();
-  delay(1000);
+  delay(100);
 }
 

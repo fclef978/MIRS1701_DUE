@@ -27,13 +27,15 @@ void slave() {
         runCtrlSet(ROT, raspiGetValue(3), raspiGetValue(4));
         break;
       case 4:
-        runCtrlSet(VEL, 0, 0);
-        velCtrlSet(raspiGetValue(5), raspiGetValue(6));
+        if (raspiGetValue(5) == 0) ;
+        runCtrlSet(VEL, raspiGetValue(5), raspiGetValue(6));
         break;
       case 10:
+        digitalWrite(PIN_LED, HIGH);
         btA = raspiGetValue(10);
         btB = raspiGetValue(11);
         btChangeFlag = 1;
+        break;
       case 100:
         softwareReset();
         break;

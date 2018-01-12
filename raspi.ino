@@ -94,6 +94,7 @@ int raspiSortCommand(String cmd) {
       }
       break;
     case 'B': // command
+          digitalWrite(PIN_LED, HIGH);
       switch (backward) {
         case 'A': // update
           result = 10;
@@ -116,6 +117,7 @@ int raspiSortCommand(String cmd) {
         default:
           result = -1;
       }
+      break;
     default:
       result = -1;
   }
