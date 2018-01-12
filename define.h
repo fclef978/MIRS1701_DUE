@@ -20,11 +20,11 @@ typedef enum {
 #define PIN_DIR_L   10
 #define PIN_PWM_R   11
 #define PIN_DIR_R   12
-#define PIN_BTV_A   A0
-#define PIN_BTV_B   A1
-#define PIN_JS_X    A3
-#define PIN_JS_Y    A4
-#define PIN_SLVR    A5
+#define PIN_BTV_A   54
+#define PIN_BTV_B   55
+#define PIN_JS_X    57
+#define PIN_JS_Y    58
+#define PIN_SLVR    59
 
 /* パラメータ */
 // 動作周期 [ms]
@@ -43,4 +43,4 @@ typedef enum {
 // 左タイヤに対する右タイヤの回転比
 #define L_R_RATIO 1.0033 //すると右 小さくすると左に曲がる
 // バッテリ入力の分圧比
-#define V_RATIO 0.5 
+#define V_RATIO 0.33333

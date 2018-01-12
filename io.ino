@@ -55,7 +55,7 @@ double ioGetBatt(char ch) {
       return analogRead(PIN_BTV_A) * 3.3 / 1024.0 / V_RATIO;
       break;
     case 'b':
-      return analogRead(PIN_BTV_A) * 3.3 / 1024.0 / V_RATIO;
+      return analogRead(PIN_BTV_B) * 3.3 / 1024.0 / V_RATIO;
       break;
     default:
       break;
@@ -65,10 +65,10 @@ double ioGetBatt(char ch) {
 int ioGetJs(char ch) {
   switch (ch) {
     case 'x':
-      return analogRead(PIN_JS_X) - 512;
+      return analogRead(PIN_JS_X);
       break;
     case 'y':
-      return analogRead(PIN_JS_Y) - 512;
+      return analogRead(PIN_JS_Y);
       break;
     default:
       break;
@@ -76,6 +76,6 @@ int ioGetJs(char ch) {
 }
 
 int ioGetVR() {
-  analogRead(PIN_SLVR) - 512;
+  return analogRead(PIN_SLVR);
 }
 
