@@ -3,6 +3,7 @@ static double speed_ref  = 0.0;
 static double speed_curr = 0.0;
 static double dist_ref   = 0.0;
 static double dist_curr  = 0.0;
+static double radius = 0.0;
 
 void runCtrlExecute() {
   // 直進制御において減速を開始する距離 [cm]
@@ -85,6 +86,8 @@ void runCtrlExecute() {
       case VEL:
         velCtrlSet(speed_ref, dist_ref);
         break;
+      case TUR:
+        
   }
 }
 
@@ -93,6 +96,10 @@ void runCtrlSet(run_state_t state, double speed, double dist) {
   speed_ref = abs(speed);
   dist_ref = dist;
   if (state != VEL) velCtrlReset();
+}
+
+void runCtrlSetR(double radius_) {
+  radius = radius_;
 }
 
 void runCtrlGet(run_state_t *state, double *speed, double *dist) {

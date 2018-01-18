@@ -3,7 +3,8 @@ typedef enum {
   STP = 0,
   STR,
   ROT,
-  VEL
+  VEL,
+  TUR
 } run_state_t;
 
 /* ピン配置 */
@@ -20,6 +21,8 @@ typedef enum {
 #define PIN_DIR_L   10
 #define PIN_PWM_R   11
 #define PIN_DIR_R   12
+#define PIN_RESET   13
+#define PIN_DBG     52
 #define PIN_BTV_A   54
 #define PIN_BTV_B   55
 #define PIN_JS_X    57

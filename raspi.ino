@@ -5,23 +5,27 @@ void raspiOpen() {
   SerialUSB.begin(2000000UL); // 2Mbpsで通信 (ULはunsigned longの意)
   SerialUSB.setTimeout(1);    // タイムアウト時間を設定 単位はミリ秒)
   SerialUSB.flush();          // バッファをクリア
-
   String buf; // バッファ
   while (1) {
     buf = findStringUntil(';');         // セミコロンが見つかったら文字列を返す
+    ioSetLED(true);
     if (buf == "RasPi:Ready") {         // 所定の文字列かどうか判定する
       SerialUSB.print("Arduino:OK;"); // 応答を返す
       break;
     }
     delay(1);
   }
-
   for (int i = 0; i < 128; i++) {
     values[i] = 0;
   }
 }
 
 int raspiGetValue(int addr) {
+  if (addr == 0) {
+    int tmp = values[0];
+    values[0] = 0;
+    return tmp;
+  }
   return values[addr];
 }
 
@@ -51,7 +55,7 @@ bool raspiReceive() {
   resAddr = raspiSortCommand(a);
   if (resAddr == -1) {
     return false;
-  }
+  } 
   values[resAddr] = b.toInt();
   return true;
 }
@@ -93,8 +97,22 @@ int raspiSortCommand(String cmd) {
           result = -1;
       }
       break;
+    case 'T': // command
+      switch (backward) {
+        case 'A': // update
+          result = 7;
+          break;
+        case 'S': // update
+          result = 8;
+          break;
+        case 'R': // update
+          result = 9;
+          break;
+        default:
+          result = -1;
+      }
+      break;
     case 'B': // command
-          digitalWrite(PIN_LED, HIGH);
       switch (backward) {
         case 'A': // update
           result = 10;

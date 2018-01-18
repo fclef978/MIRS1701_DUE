@@ -10,9 +10,6 @@ void slave() {
     btChangeFlag = 0;
     ioSetBt(btA, btB);
   }
-  if (raspiGetValue(0) == 0) {
-    return;
-  }
   if (raspiIsUpdated()) {
     switch (raspiGetValue(0)) {
       case 0:
@@ -27,11 +24,11 @@ void slave() {
         runCtrlSet(ROT, raspiGetValue(3), raspiGetValue(4));
         break;
       case 4:
-        if (raspiGetValue(5) == 0) ;
         runCtrlSet(VEL, raspiGetValue(5), raspiGetValue(6));
         break;
+      case 5:
+        
       case 10:
-        digitalWrite(PIN_LED, HIGH);
         btA = raspiGetValue(10);
         btB = raspiGetValue(11);
         btChangeFlag = 1;

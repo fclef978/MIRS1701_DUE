@@ -1,5 +1,6 @@
 void ioOpen() {
-  pinMode(PIN_LED, OUTPUT);
+  pinMode(PIN_RESET, OUTPUT);
+  pinMode(PIN_DBG, OUTPUT);
   pinMode(PIN_CTRL_A, INPUT_PULLUP);
   pinMode(PIN_CTRL_B, INPUT_PULLUP);
   pinMode(PIN_PIC, INPUT);
@@ -11,13 +12,17 @@ void ioOpen() {
   pinMode(PIN_JS_Y, INPUT);
   pinMode(PIN_SLVR, INPUT);
   
-  digitalWrite(PIN_LED, LOW);
+  digitalWrite(PIN_RESET, HIGH);
   digitalWrite(PIN_BTSW_A, LOW);
   digitalWrite(PIN_BTSW_B, LOW);
 }
 
-void ioSetLed(int val) {
-  digitalWrite(PIN_LED, val);
+void ioReset() {
+  digitalWrite(PIN_RESET, LOW);
+}
+
+void ioSetLED(int val) {
+  digitalWrite(PIN_DBG, val);
 }
 
 void ioSetBt(int a, int b) {
