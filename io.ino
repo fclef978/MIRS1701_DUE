@@ -25,16 +25,24 @@ void ioSetLED(int val) {
   digitalWrite(PIN_DBG, val);
 }
 
+int ioGetLed() {
+  return digitalRead(PIN_DBG);
+}
+
+void ioBlinkLed(int ccl) {
+  static int c = 0;
+  if (c++ > ccl) {
+    digitalWrite(PIN_DBG, !digitalRead(PIN_DBG));
+    c = 0;
+  }
+}
+
 void ioSetBt(int a, int b) {
   if (a == 1 && b == 1) {
     return;
   }
   digitalWrite(PIN_BTSW_A, a);
   digitalWrite(PIN_BTSW_B, b);
-}
-
-int ioGetLed() {
-  return digitalRead(PIN_LED);
 }
 
 int ioGetCap() {

@@ -49,3 +49,5 @@ typedef enum {
 #define V_RATIO 0.33333
 //機体半径
 #define RADIUS  20.0
+
+#define ASCII_A 0x41

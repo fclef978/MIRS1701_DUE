@@ -21,3 +21,56 @@ void commSend() {
   raspiSend("mirs", "1701");  //何故か必要
 }
 
+void comm() {
+  int cmd[8];
+  while (true) {
+    if (raspiReceive()) {
+      if (raspiIsUpdated()) {
+        packCmd(cmd);
+        quePush(cmd);
+      }
+    }
+    else {
+      break;
+    }
+  }
+  commSend();
+}
+
+static void packCmd(int cmd[]) {
+  switch (raspiGetValue("RM")) {
+    case 0:
+      break;
+    case 1:
+      cmd[0] = 1;
+      break;
+    case 2:
+      cmd[0] = 2;
+      cmd[1] = raspiGetValue("RS");
+      cmd[2] = raspiGetValue("RD");
+      break;
+    case 3:
+      cmd[0] = 3;
+      cmd[1] = raspiGetValue("RO");
+      cmd[2] = raspiGetValue("RA");
+      break;
+    case 4:
+      cmd[0] = 4;
+      cmd[1] = raspiGetValue("VL");
+      cmd[2] = raspiGetValue("VR");
+      break;
+    case 5:
+      cmd[0] = 5;
+      cmd[1] = raspiGetValue("TS");
+      cmd[2] = raspiGetValue("TA");
+      cmd[1] = raspiGetValue("TR");
+      cmd[2] = raspiGetValue("TD");
+      break;
+    case 10:
+      cmd[0] = 10;
+      cmd[1] = raspiGetValue("BA");
+      cmd[2] = raspiGetValue("BB");
+      break;
+  }
+}
+

@@ -11,30 +11,30 @@ void slave() {
     btChangeFlag = 0;
     ioSetBt(btA, btB);
   }
-  if (raspiIsUpdated()) {
-    switch (raspiGetValue(0)) {
+  while (queGetLength() > 0) {
+    int cmd[8];
+    quePop(cmd); 
+    switch (cmd[0]) {
       case 0:
         break;
       case 1:
         runCtrlSet(STP, 0, 0);
         break;
       case 2:
-        runCtrlSet(STR, raspiGetValue(1), raspiGetValue(2));
+        runCtrlSet(STR, cmd[1], cmd[2]);
         break;
       case 3:
-        runCtrlSet(ROT, raspiGetValue(3), raspiGetValue(4));
+        runCtrlSet(ROT, cmd[1], cmd[2]);
         break;
       case 4:
-        runCtrlSet(VEL, raspiGetValue(5), raspiGetValue(6));
+        runCtrlSet(VEL, cmd[1], cmd[2]);
         break;
       case 5:
-        runCtrlSet(TUR, raspiGetValue(7), raspiGetValue(8));
-        runCtrlSetRD(raspiGetValue(9), raspiGetValue(12));
+        runCtrlSet(TUR, cmd[1], cmd[2]);
+        runCtrlSetRD(cmd[3], cmd[4]);
         break;
       case 10:
-        btA = raspiGetValue(10);
-        btB = raspiGetValue(11);
-        ioSetBt(btA, btB);
+        ioSetBt(cmd[1], cmd[2]);
         break;
       case 100:
         softwareReset();

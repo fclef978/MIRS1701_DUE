@@ -2,7 +2,7 @@
 /*
  * これCUのシステムはキューを使わないとやばいでしょ
  */
-static int values[128];
+static int values[26][26];
 static Serial_ S;
 
 void raspiOpen() {
@@ -22,18 +22,19 @@ void raspiOpen() {
     }
     delay(1);
   }
-  for (int i = 0; i < 128; i++) {
-    values[i] = 0;
+  for (int i = 0; i < 26; i++) {
+    for (int j = 0; j < 26; j++) {
+      values[i][j] = 0;
+    }
   }
 }
 
-int raspiGetValue(int addr) {
-  if (addr == 0) {
-    int tmp = values[0];
-    values[0] = 0;
-    return tmp;
-  }
-  return values[addr];
+int raspiGetValue(String cmd) {
+  return values[cmd[0] - ASCII_A][cmd[1] - ASCII_A];
+}
+
+void raspiSetValue(String cmd, int val) {
+  values[cmd[0] - ASCII_A][cmd[1] - ASCII_A] = val;
 }
 
 void raspiSend(String cmd, String val) {
@@ -45,10 +46,10 @@ void raspiWrite(String data) {
 }
 
 bool raspiIsUpdated() {
-  if (values[100] == 0) {
+  if (raspiGetValue("CU") == 0) {
     return false;
   }
-  values[100] = 0;
+  raspiSetValue("CU", 0);
   return true;
 }
 
@@ -56,100 +57,10 @@ bool raspiReceive() {
   String s, a = "", b = "";
   int resAddr = 0;
   s = findStringUntil(';');
-  if (!split(&a, &b, s, ':')) {
-    return false;
-  }
-  resAddr = raspiSortCommand(a);
-  if (resAddr == -1) {
-    return false;
-  } 
-  values[resAddr] = b.toInt();
+  if (!split(&a, &b, s, ':')) return false;
+  if (a.length() != 2) return false;
+  raspiSetValue(a, b.toInt());
   return true;
-}
-
-int raspiSortCommand(String cmd) {
-  if (cmd.length() != 2) {
-    return -1;
-  }
-  int result = 0;
-  char forward = cmd[0], backward = cmd[1];
-  switch (forward) {
-    case 'R': // run
-      switch (backward) {
-        case 'M': // mode
-          result = 0;
-          break;
-        case 'S': // speed
-          result = 1;
-          break;
-        case 'D': // distance
-          result = 2;
-          break;
-        case 'O': // omega
-          result = 3;
-          break;
-        case 'A': // angle
-          result = 4;
-          break;
-        default:
-          result = -1;
-      }
-      break;
-    case 'C': // command
-      switch (backward) {
-        case 'U': // update
-          result = 100;
-          break;
-        default:
-          result = -1;
-      }
-      break;
-    case 'T': // command
-      switch (backward) {
-        case 'S': // update
-          result = 7;
-          break;
-        case 'A': // update
-          result = 8;
-          break;
-        case 'R': // update
-          result = 9;
-          break;
-        case 'D': // update
-          result = 12;
-          break;
-        default:
-          result = -1;
-      }
-      break;
-    case 'B': // command
-      switch (backward) {
-        case 'A': // update
-          result = 10;
-          break;
-        case 'B': // update
-          result = 11;
-          break;
-        default:
-          result = -1;
-      }
-      break;
-    case 'V': // velocity
-      switch (backward) {
-        case 'L':
-          result = 5;
-          break;
-        case 'R':
-          result = 6;
-          break;
-        default:
-          result = -1;
-      }
-      break;
-    default:
-      result = -1;
-  }
-  return result;
 }
 
 /*
