@@ -47,3 +47,5 @@ typedef enum {
 #define L_R_RATIO 1.0033 //すると右 小さくすると左に曲がる
 // バッテリ入力の分圧比
 #define V_RATIO 0.33333
+//機体半径
+#define RADIUS  20.0

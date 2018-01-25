@@ -2,13 +2,12 @@
 static int values[128];
 
 void raspiOpen() {
-  SerialUSB.begin(2000000UL); // 2Mbpsで通信 (ULはunsigned longの意)
+  SerialUSB.begin(230400UL); // 2Mbpsで通信 (ULはunsigned longの意)
   SerialUSB.setTimeout(1);    // タイムアウト時間を設定 単位はミリ秒)
   SerialUSB.flush();          // バッファをクリア
   String buf; // バッファ
   while (1) {
     buf = findStringUntil(';');         // セミコロンが見つかったら文字列を返す
-    ioSetLED(true);
     if (buf == "RasPi:Ready") {         // 所定の文字列かどうか判定する
       SerialUSB.print("Arduino:OK;"); // 応答を返す
       break;
@@ -99,14 +98,17 @@ int raspiSortCommand(String cmd) {
       break;
     case 'T': // command
       switch (backward) {
-        case 'A': // update
+        case 'S': // update
           result = 7;
           break;
-        case 'S': // update
+        case 'A': // update
           result = 8;
           break;
         case 'R': // update
           result = 9;
+          break;
+        case 'D': // update
+          result = 12;
           break;
         default:
           result = -1;

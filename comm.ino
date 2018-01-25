@@ -16,5 +16,8 @@ void commSend() {
   raspiSend("ctrlA", String(ioGetCtrlBtn('a')));
   raspiSend("ctrlB", String(ioGetCtrlBtn('b')));
   raspiSend("cap", String(ioGetCap()));
+  //analogRead(PIN_BTV_B);
+  //raspiSend("test", String(analogRead(PIN_BTV_B)));
+  raspiSend("mirs", "1701");  //何故か必要
 }
 
