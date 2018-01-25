@@ -1,7 +1,7 @@
 static volatile unsigned char readPointer = 0;
 static volatile unsigned char writePointer = 0;
 
-static int bufSize = 256;
+static const int bufSize = 256;
 static volatile int q[256][8];
 
 
@@ -23,6 +23,7 @@ void quePush(int cmd[]) {
 }
 
 void quePop(int cmd[]) {
+  if (writePointer <= readPointer) return;
   int rp = readPointer++;
   for (int i = 0; i < 8; i++) {
     cmd[i] = q[rp][i];
