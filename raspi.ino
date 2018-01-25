@@ -1,4 +1,7 @@
 // ラズパイ通信
+/*
+ * これCUのシステムはキューを使わないとやばいでしょ
+ */
 static int values[128];
 
 void raspiOpen() {
