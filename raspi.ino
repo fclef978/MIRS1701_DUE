@@ -3,6 +3,7 @@
  * これCUのシステムはキューを使わないとやばいでしょ
  */
 static int values[128];
+static Serial_ S;
 
 void raspiOpen() {
   //  USBの調子がおかしい時はProgrammingportで動かすように
