@@ -5,14 +5,18 @@
 static int values[128];
 
 void raspiOpen() {
-  SerialUSB.begin(230400UL); // 2Mbpsで通信 (ULはunsigned longの意)
-  SerialUSB.setTimeout(1);    // タイムアウト時間を設定 単位はミリ秒)
-  SerialUSB.flush();          // バッファをクリア
+  //  USBの調子がおかしい時はProgrammingportで動かすように
+  S = SerialUSB;
+  //S = Serial;
+  
+  S.begin(230400UL); // 2Mbpsで通信 (ULはunsigned longの意)
+  S.setTimeout(1);    // タイムアウト時間を設定 単位はミリ秒)
+  S.flush();          // バッファをクリア
   String buf; // バッファ
   while (1) {
     buf = findStringUntil(';');         // セミコロンが見つかったら文字列を返す
     if (buf == "RasPi:Ready") {         // 所定の文字列かどうか判定する
-      SerialUSB.print("Arduino:OK;"); // 応答を返す
+      S.print("Arduino:OK;"); // 応答を返す
       break;
     }
     delay(1);
@@ -36,7 +40,7 @@ void raspiSend(String cmd, String val) {
 }
 
 void raspiWrite(String data) {
-  SerialUSB.print(data);
+  S.print(data);
 }
 
 bool raspiIsUpdated() {
@@ -162,8 +166,8 @@ String findStringUntil(char terminater) {
       result = "";                  // 結果に空文字列を代入します。
       break;
     }
-    if (SerialUSB.available() > 0) {  // バッファに何か入っているか判定します。
-      tmp = SerialUSB.read();         // 一時的な変数にバッファから一文字読み出します。
+    if (S.available() > 0) {  // バッファに何か入っているか判定します。
+      tmp = S.read();         // 一時的な変数にバッファから一文字読み出します。
       if (tmp == terminater) {         // 指定文字と等しいか判定する。
         result = buf;                  // 内部バッファを結果に代入する。
         buf = "";                      // 内部バッファを初期化する。
