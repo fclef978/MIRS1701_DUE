@@ -1,8 +1,9 @@
 #include <Scheduler.h>
 #include "define.h"
 /*
+RM:1;CU:1;
 RM:2;RS:50;RD:100;CU:1;
-RasPi:Ready;RM:10;BA:1;BB:0;CU:1;
+RasPi:Ready;RM:10;BA:1;BB:0;CU:1; 
 RasPi:Ready;RM:10;BA:1;BB:0;CU:1;RM:4;VL:20;VR:20;CU:1;
 RasPi:Ready;RM:10;BA:1;BB:0;CU:1;RM:5;TS:30;TA:45;TR:10;TD:1;CU:1;
 */
@@ -13,8 +14,11 @@ void setup() {
   ioOpen();
   encoderOpen();
   motorOpen();
+  ioSetBt(1, 0);
+  motorSet(50, 50);
   raspiOpen();
   queOpen();
+  //test_encoder();
   Scheduler.startLoop(loopCommunication);
 }
 

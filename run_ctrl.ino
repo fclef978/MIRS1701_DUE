@@ -86,7 +86,6 @@ void runCtrlExecute() {
       break;
     case VEL:
       velCtrlSet(speed_ref, dist_ref);
-
       break;
     case TUR:
       double short_radius = 20.0 - D_TIRE / 2 + radius, long_radius = D_TIRE / 2 + 20.0 + radius;

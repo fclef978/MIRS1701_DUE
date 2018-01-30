@@ -23,10 +23,20 @@ void commSend() {
 
 void comm() {
   int cmd[8];
+  for (int i = 0; i < 8; i++) {
+    cmd[i] = 0;
+  }
   while (true) {
     if (raspiReceive()) {
       if (raspiIsUpdated()) {
         packCmd(cmd);
+        /*
+        for (int i = 0; i < 8; i++) {
+          SerialUSB.print(cmd[i]);
+          SerialUSB.print(" ");
+        }
+        SerialUSB.println("");
+        */
         quePush(cmd);
       }
     }
@@ -34,7 +44,7 @@ void comm() {
       break;
     }
   }
-  commSend();
+  //commSend();
 }
 
 static void packCmd(int cmd[]) {
@@ -63,8 +73,8 @@ static void packCmd(int cmd[]) {
       cmd[0] = 5;
       cmd[1] = raspiGetValue("TS");
       cmd[2] = raspiGetValue("TA");
-      cmd[1] = raspiGetValue("TR");
-      cmd[2] = raspiGetValue("TD");
+      cmd[3] = raspiGetValue("TR");
+      cmd[4] = raspiGetValue("TD");
       break;
     case 10:
       cmd[0] = 10;

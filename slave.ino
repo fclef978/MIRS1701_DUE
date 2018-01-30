@@ -13,7 +13,14 @@ void slave() {
   }
   while (queGetLength() > 0) {
     int cmd[8];
-    quePop(cmd); 
+    quePop(cmd);
+    /*
+    for (int i = 0; i < 8; i++) {
+      SerialUSB.print(cmd[i]);
+      SerialUSB.print(" ");
+    }
+    SerialUSB.println("");
+    */
     switch (cmd[0]) {
       case 0:
         break;
