@@ -43,9 +43,6 @@ void slave() {
       case 10:
         ioSetBt(cmd[1], cmd[2]);
         break;
-      case 100:
-        softwareReset();
-        break;
       default:
         break;
     }

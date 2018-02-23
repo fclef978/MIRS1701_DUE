@@ -44,7 +44,7 @@ void comm() {
       break;
     }
   }
-  //commSend();
+  commSend();
 }
 
 static void packCmd(int cmd[]) {

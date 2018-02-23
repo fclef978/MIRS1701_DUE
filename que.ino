@@ -8,7 +8,7 @@ static volatile int q[256][8];
 void queOpen() {
   readPointer = 0;
   writePointer = 0;
-  for (int i = 0; i < 256; i++) {
+  for (int i = 0; i < bufSize; i++) {
     for (int j = 0; j < 8; j++) {
       q[i][j] = 0;
     }

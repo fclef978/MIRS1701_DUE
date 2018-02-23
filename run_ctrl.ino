@@ -118,7 +118,8 @@ void runCtrlExecute() {
 
 void runCtrlSet(run_state_t state, double speed, double dist) {
   run_state = state;
-  speed_ref = abs(speed);
+  if (state == VEL) speed_ref = speed;
+  else speed_ref = abs(speed);
   dist_ref = dist;
   if (state != VEL) velCtrlReset();
 }

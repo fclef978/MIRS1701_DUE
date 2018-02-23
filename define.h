@@ -18,9 +18,9 @@ typedef enum {
 #define PIN_ENC_B_R 7
 #define PIN_ENC_A_R 8
 #define PIN_PWM_L   9
-#define PIN_DIR_L   10
+#define PIN_DIR_L   26
 #define PIN_PWM_R   11
-#define PIN_DIR_R   12
+#define PIN_DIR_R   27
 #define PIN_RESET   13
 #define PIN_DBG     52
 #define PIN_BTV_A   54

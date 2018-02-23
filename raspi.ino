@@ -10,7 +10,7 @@ void raspiOpen() {
   S = SerialUSB;
   //S = Serial;
   
-  S.begin(230400UL); // 2Mbpsで通信 (ULはunsigned longの意)
+  S.begin(2000000UL); // 2Mbpsで通信 (ULはunsigned longの意)
   S.setTimeout(1);    // タイムアウト時間を設定 単位はミリ秒)
   S.flush();          // バッファをクリア
   String buf; // バッファ

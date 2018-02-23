@@ -43,17 +43,6 @@ void velCtrlExecute() {
   // 速度指令値 = 0 なら強制的に停止
   if (vel_ref_l == 0.0) pwm_l = 0;
   if (vel_ref_r == 0.0) pwm_r = 0;
-
-  long int el, er;
-  encoderGet(&el, &er);
-  SerialUSB.print(dist_curr_l);
-  SerialUSB.print(" ");
-  SerialUSB.print(dist_curr_r);
-  SerialUSB.print(" ");
-  SerialUSB.print(pwm_l);
-  SerialUSB.print(" ");
-  SerialUSB.print(pwm_r);
-  SerialUSB.println("");
   motorSet(pwm_l, pwm_r);
 
   dist_prev_l = dist_curr_l;
